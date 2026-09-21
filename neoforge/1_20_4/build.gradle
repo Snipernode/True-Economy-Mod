@@ -1,0 +1,37 @@
+plugins {
+    id 'net.neoforged.moddev' version '2.0.144'
+}
+
+group = 'com.economy.mod'
+version = '1.20.4'
+base { archivesName = 'trueeconomy-neoforge_1_20_4' }
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
+}
+
+sourceSets.main.java.srcDirs += [
+        rootProject.file('core/src/main/java'),
+        rootProject.file('glue-forge/src/main/java')
+]
+
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.neoforged.net/releases" }
+}
+
+neoForge {
+    version = "20.4.251"
+    runs {
+        client {}
+        server {}
+    }
+    mods {
+        trueeconomy { sourceSet sourceSets.main }
+    }
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand(version: project.version) }
+}

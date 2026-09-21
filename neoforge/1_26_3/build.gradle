@@ -1,0 +1,43 @@
+plugins {
+    id 'net.neoforged.moddev' version '2.0.144'
+}
+
+group = 'com.economy.mod'
+version = '26.3'
+base { archivesName = 'trueeconomy-neoforge_26_3' }
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(25) }
+}
+
+sourceSets.main.java.srcDirs += [
+        rootProject.file('core/src/main/java'),
+        rootProject.file('glue-forge/src/main/java')
+]
+
+repositorySupport()
+
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.neoforged.net/releases" }
+}
+
+neoForge {
+    version = "26.3.0.7-beta"
+    runs {
+        client {}
+        server {}
+    }
+    mods {
+        trueeconomy { sourceSet sourceSets.main }
+    }
+}
+
+def repositorySupport() {
+    // moddev provides its own artifact repositories through the plugin
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand(version: project.version) }
+}

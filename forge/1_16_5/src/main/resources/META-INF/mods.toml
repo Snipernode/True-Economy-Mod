@@ -1,0 +1,8 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT"
+[[mods]]
+modId="trueeconomy"
+version="${version}"
+displayName="True-Economy"
+description="Dynamic supply/demand economy, black market, shops, auctions, banking and more."

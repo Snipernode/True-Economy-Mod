@@ -6,6 +6,10 @@ pluginManagement {
     }
 }
 
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
 rootProject.name = "true-economy-mod"
 
 dependencyResolutionManagement {
@@ -29,7 +33,30 @@ def mcVersions = [
 
 // 1.16.x-1.16.5 are omitted (plugin supported 1.16 as its minimum; we include 1.16.5),
 // and we only ship every release from the plugin's 1.16 baseline forward.
+// Fabric versions
 mcVersions.each { v ->
     def name = v.replace('.', '_')
     include "versions:${name}"
 }
+
+def neoforgeVersions = [
+        "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6",
+        "1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5", "1.21.6", "1.21.7",
+        "1.21.8", "1.21.9", "1.21.10", "1.21.11",
+        "26.1", "26.1.1", "26.1.2", "26.2", "26.3"
+]
+neoforgeVersions.each { v ->
+    include "neoforge:${v.replace('.', '_')}"
+}
+
+def forgeVersions = [
+        "1.17.1", "1.18.2",
+        "1.19", "1.19.1", "1.19.2", "1.19.3", "1.19.4",
+        "1.20", "1.20.1"
+]
+forgeVersions.each { v ->
+    include "forge:${v.replace('.', '_')}"
+}
+
+// forge:1_16_5 is kept as scaffolding only (classic ForgeGradle toolchain, see README).
+// include "forge:1_16_5"

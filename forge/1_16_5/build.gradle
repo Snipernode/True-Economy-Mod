@@ -1,0 +1,72 @@
+buildscript {
+    repositories {
+        maven { url = "https://maven.minecraftforge.net/" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+
+group = 'com.economy.mod'
+version = '1.16.5'
+base { archivesName = 'trueeconomy-forge_1_16_5' }
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(8) }
+    withSourcesJar()
+}
+
+sourceSets.main.java.srcDirs += [
+        rootProject.file('core/src/main/java'),
+        rootProject.file('glue-forge/src/main/java')
+]
+
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.minecraftforge.net/" }
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.16.5'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                trueeconomy { source sourceSets.main }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                trueeconomy { source sourceSets.main }
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.42'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') { expand(version: project.version) }
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "trueeconomy",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : "trueeconomy",
+                "Implementation-Version"  : project.version
+        ])
+    }
+}
