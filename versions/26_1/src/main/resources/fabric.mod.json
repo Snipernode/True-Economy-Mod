@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "trueeconomy",
+  "version": "26.1",
+  "name": "True-Economy",
+  "description": "Dynamic supply/demand economy, black market, shops, auctions, banking and more.",
+  "authors": [
+    "Snipernode"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.economy.mod.fabric.TrueEconomyFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "minecraft": "~26.1",
+    "fabric-api": "*"
+  },
+  "mixins": [
+    "trueeconomy.mixins.json"
+  ]
+}

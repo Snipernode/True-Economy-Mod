@@ -1,0 +1,30 @@
+plugins {
+    id 'net.fabricmc.fabric-loom'
+    id 'java'
+}
+
+version = "26.1.2"
+group = 'com.economy.mod'
+
+dependencies {
+    minecraft "com.mojang.minecraft:minecraft:26.1.2"
+    implementation "net.fabricmc:fabric-loader:0.19.5"
+    implementation "net.fabricmc.fabric-api:fabric-api:0.155.3+26.1.2"
+    implementation project(':core')
+    include project(':core')
+    implementation 'com.google.code.gson:gson:2.11.0'
+    include 'com.google.code.gson:gson:2.11.0'
+}
+
+sourceSets {
+    main {
+        java.srcDirs += project.file('../../glue-mojmap/src/main/java')
+    }
+}
+
+java {
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_25
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }

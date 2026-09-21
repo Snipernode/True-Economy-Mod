@@ -1,0 +1,14 @@
+plugins {
+    id 'fabric-loom' version "${loom_version}" apply false
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+        maven { url = "https://maven.fabricmc.net/" }
+    }
+}
+
+ext {
+    javaVersion = JavaVersion.VERSION_21
+}
