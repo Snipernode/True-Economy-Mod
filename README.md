@@ -19,10 +19,15 @@ Dynamic supply/demand economy with a black market, player shops, bank & loans, a
 
 ## Quick start
 
-1. Drop `true-economy-<version>.jar` into your server's `mods/` folder (match the exact Minecraft version from the release list).
-2. Add **Fabric API** and **Fabric Loader** for your version (Fabric API 26.1+ is handled natively since 26.1 ships unobfuscated).
-3. Start the server. On first run a default `config/true-economy.json` is written.
-4. Run `/economy` for usage.
+1. Pick a release for your exact Minecraft version, then choose the artifact for your setup:
+   - `true-economy-<version>.jar` — universal, loads on both client and dedicated server.
+   - `true-economy-client-<version>.jar` — client-only; installs on a player's client for singleplayer/LAN.
+   - `true-economy-server-<version>.jar` — dedicated-server-only.
+   - `...-quilt.jar` — identical jar, labelled for the **Quilt loader** (Quilt loads Fabric mods as-is).
+2. Drop the jar into the `mods/` folder.
+3. Add **Fabric API** and **Fabric Loader** for your version on Fabric; on Quilt only Fabric API is needed (Quilt ships its own loader).
+4. Start the server (or the client for singleplayer). On first run a default `config/true-economy.json` is written.
+5. Run `/economy` for usage.
 
 ## Commands
 
@@ -90,6 +95,7 @@ Output jars: `versions/<version>/build/libs/`.
 
 - **1.16.5 – 1.21.11** use Fabric's classic `fabric-loom` with Yarn mappings; the shipped jar is remapped to intermediary.
 - **26.1 – 26.3** are unobfuscated Minecraft: they use `net.fabricmc.fabric-loom` with **no mappings**, Mojang-named glue, and no remapping step.
+- **Client/server split** is a metadata switch: each release ships a universal (`environment: "*"`), client, and server jar, and all of them run on Fabric or Quilt.
 - Shared logic lives in `core/` (pure Java, no Minecraft imports) and `glue/` (Yarn) / `glue-mojmap/` (Mojang) thin adapters. Per-version shims live under `versions/<ver>/src/main/java` for the few APIs that moved across releases (command registration v1/v2, `World`/`GameProfile` accessors, block registry access).
 
 ## Parity notes

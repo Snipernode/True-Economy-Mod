@@ -27,4 +27,10 @@ java {
     withSourcesJar()
 }
 
+
+processResources {
+    inputs.property('modEnvironment', project.findProperty('modEnvironment') ?: '*')
+    filesMatching('*.mod.json') { expand(modEnvironment: project.findProperty('modEnvironment') ?: '*') }
+}
+
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }

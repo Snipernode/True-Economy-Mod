@@ -8,7 +8,7 @@
     "Snipernode"
   ],
   "license": "MIT",
-  "environment": "*",
+  "environment": "${modEnvironment}",
   "entrypoints": {
     "main": [
       "com.economy.mod.fabric.TrueEconomyFabric"

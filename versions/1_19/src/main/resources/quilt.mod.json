@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "com.economy.mod",
+    "id": "trueeconomy",
+    "version": "1.19",
+    "metadata": {
+      "name": "True-Economy",
+      "description": "Dynamic supply/demand economy, black market, shops, auctions, banking and more.",
+      "license": "MIT",
+      "contributors": {
+        "Snipernode": [
+          "Owner"
+        ]
+      }
+    },
+    "entrypoints": {
+      "init": [
+        "com.economy.mod.fabric.TrueEconomyFabric"
+      ]
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "versions": ">=0.17.0"
+      },
+      {
+        "id": "minecraft",
+        "versions": "~1.19"
+      }
+    ]
+  },
+  "environment": "${modEnvironment}",
+  "mixin": [
+    "trueeconomy.mixins.json"
+  ]
+}
